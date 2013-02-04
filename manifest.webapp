@@ -11,7 +11,8 @@
     }
   },
   "permissions": {
-    "mobileconnection": {}
+    "mobileconnection": {},
+    "systemXHR": {}
   },
   "icons": {
     "60": "/style/icons/60/Feedback.png"
