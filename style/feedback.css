@@ -23,3 +23,12 @@ textarea#feedback-textarea {
   height: -moz-calc(100% - 13rem);
 }
 
+
+section[role="status"] {
+  transition: all 0.2s ease;
+  transform: translateY(0);
+}
+
+section[role="status"].hidden {
+  transform: translateY(100%);
+}

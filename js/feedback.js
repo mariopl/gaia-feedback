@@ -1,8 +1,9 @@
 'use strict';
 
-const DOGFOOD_URL = 'http://owd.tid.es/feedback';
+// const DOGFOOD_URL = 'http://owd.tid.es/feedback';
+const DOGFOOD_URL = 'http://dogfood.eu01.aws.af.cm/';
 
-var Feedback = {  
+var Feedback = {
   init: function fb_init() {
     var done = document.getElementById('done');
     done.addEventListener('click', this.send.bind(this));
@@ -21,13 +22,13 @@ var Feedback = {
     var contact = document.getElementById('contact').value;
 
     var mozMobileConnection = navigator.mozMobileConnection;
-    if (!mozMobileConnection) { 
+    if (!mozMobileConnection) {
       window.alert(navigator.mozL10n.get('error'));
       return;
     }
 
     var req = mozMobileConnection.sendMMI('*#06#');
-    req.onsuccess = (function onIMEI() {      
+    req.onsuccess = (function onIMEI() {
       var formData = new FormData();
       formData.append('build_id', navigator.buildID);
 
@@ -43,10 +44,32 @@ var Feedback = {
         formData.append('contact', contact);
       }
 
+      // @type: error || success
+      var message = function(type) {
+          var status = document.getElementById(type+'Msg');
+          status.classList.remove('hidden');
+          var delay = setTimeout(function() {
+           status.classList.add('hidden');
+          }, 2000);
+      }
+
       var xhr = new XMLHttpRequest();
       xhr.open('POST', DOGFOOD_URL);
+      xhr.addEventListener('load', function() {
+        if (xhr.status === 200 || xhr.status === 0) {
+          message("success");
+        } else {
+          message("error");
+        }
+      });
+      xhr.onerror = function () {
+        if (xhr.status === 0) {
+          message("success");
+          return;
+        }
+        message("error");
+      };
       xhr.send(formData);
-
       this.reset();
     }).bind(this);
     req.onerror = function onerror() {
