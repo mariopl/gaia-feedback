@@ -1,7 +1,6 @@
 'use strict';
 
-// const DOGFOOD_URL = 'http://owd.tid.es/feedback';
-const DOGFOOD_URL = 'http://dogfood.eu01.aws.af.cm/';
+const DOGFOOD_URL = 'http://openwebdevice.com:9000';
 
 var Feedback = {
   init: function fb_init() {
