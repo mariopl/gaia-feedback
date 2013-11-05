@@ -45,6 +45,14 @@ var Feedback = {
       }
       message("error");
     };
+    var formData = new FormData();
+      formData.append('build_id', navigator.buildID);
+        if (contact) {
+          formData.append('contact', contact);
+        }
+      var comment = document.getElementById('feedback-textarea');
+      formData.append('comment', comment.value);
+
     xhr.send(formData);
     this.reset();
   }
