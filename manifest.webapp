@@ -1,7 +1,7 @@
 {
   "name": "Feedback",
   "default_locale": "en-US",
-  "type": "certified",
+  "type": "privileged",
   "description": "Gaia Feedback",
   "launch_path": "/index.html",
   "locales": {
@@ -11,7 +11,6 @@
     }
   },
   "permissions": {
-    "mobileconnection": {},
     "systemXHR": {}
   },
   "icons": {
