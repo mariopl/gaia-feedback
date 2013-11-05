@@ -34,8 +34,10 @@ var Feedback = {
     xhr.addEventListener('load', function() {
       if (xhr.status === 200 || xhr.status === 0) {
         message("success");
+        alert('Your feedback message has been sent')
       } else {
         message("error");
+        alert('An error ocurred sending your feedback. Please, try again later.')
       }
     });
     xhr.onerror = function () {
