@@ -29,7 +29,7 @@ var Feedback = {
         }, 2000);
     }
 
-    var xhr = new XMLHttpRequest();
+    var xhr = new XMLHttpRequest({mozSystem: true});
     xhr.open('POST', DOGFOOD_URL);
     xhr.addEventListener('load', function() {
       if (xhr.status === 200 || xhr.status === 0) {
@@ -47,8 +47,8 @@ var Feedback = {
     };
     xhr.send(formData);
     this.reset();
-  });
-};
+  }
+}
 
 window.addEventListener('load', function fbLoad(evt) {
   window.removeEventListener('load', fbLoad);
