@@ -29,7 +29,7 @@ var Feedback = {
         }, 2000);
     }
 
-    var xhr = new XMLHttpRequest();
+    var xhr = new XMLHttpRequest({mozSystem: true});
     xhr.open('POST', DOGFOOD_URL);
     xhr.addEventListener('load', function() {
       if (xhr.status === 200 || xhr.status === 0) {
@@ -45,10 +45,18 @@ var Feedback = {
       }
       message("error");
     };
+    var formData = new FormData();
+      formData.append('build_id', navigator.buildID);
+        if (contact) {
+          formData.append('contact', contact);
+        }
+      var comment = document.getElementById('feedback-textarea');
+      formData.append('comment', comment.value);
+
     xhr.send(formData);
     this.reset();
-  });
-};
+  }
+}
 
 window.addEventListener('load', function fbLoad(evt) {
   window.removeEventListener('load', fbLoad);
